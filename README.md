@@ -1,2 +1,2 @@
 # sudoku
-Sudoku puzzle solver.
+Tool for solving Sudoku puzzles of arbitrary size.
