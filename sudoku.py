@@ -5,21 +5,21 @@ import numpy as np
 from time import time
 
 
-class Solver:
+class Sudoku:
     """
-    Class for solving Sudoku puzzles of arbitrary size.
+    Sudoku grid.
 
     Attributes:
 
-        grid (np.ndarray) - ddd
+        grid (np.ndarray[int]) - sudoku grid, may be incomplete
 
         depth (int) - recursion depth
 
         idxs (list of (int, int)) - indices of empty cells
 
-        w (int) - grid size
+        w (int) - grid width, e.g. 9 in a 2-D puzzle
 
-        s (int) - subgrid size
+        s (int) - subgrid width, e.g. 3 in a 2-D puzzle
 
         options (dict) - possible values for each empty cell
 
@@ -28,6 +28,16 @@ class Solver:
     """
 
     def __init__(self, grid, depth=0):
+        """
+        Initialize Sudoku grid.
+
+        Args:
+
+            grid (np.ndarray[int]) - sudoku grid, may be incomplete
+
+            depth (int) - recursion depth
+
+        """
         self.grid = np.asarray(grid, dtype=int)
         self.depth = depth
         self.idxs = list(zip(*(self.grid == 0).nonzero()))
@@ -72,6 +82,11 @@ class Solver:
                 return False
 
         return True
+
+    @property
+    def success(self):
+        """ Returns True if puzzle is complete and valid. """
+        return self.complete and self.valid
 
     def clone(self):
         """ Returns clone of grid. """
