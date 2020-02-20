@@ -11,7 +11,7 @@ class Sudoku:
 
     Attributes:
 
-        grid (np.ndarray[int]) - sudoku grid, may be incomplete
+        grid (np.ndarray[int]) - 2-D sudoku grid
 
         depth (int) - recursion depth
 
@@ -33,11 +33,15 @@ class Sudoku:
 
         Args:
 
-            grid (np.ndarray[int]) - sudoku grid, may be incomplete
+            grid (np.ndarray[int]) - 2-D sudoku grid, may be incomplete
 
             depth (int) - recursion depth
 
         """
+
+        grid = np.asarray(grid, dtype=int)
+        assert grid.ndim == 2, 'Only 2-D grids are supported.'
+
         self.grid = np.asarray(grid, dtype=int)
         self.depth = depth
         self.idxs = list(zip(*(self.grid == 0).nonzero()))
